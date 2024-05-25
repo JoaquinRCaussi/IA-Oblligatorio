@@ -31,6 +31,7 @@ class Agent():
                 step_count += 1
                 print('->', state, action, reward, obs, done)
                 self.env.render()
+            print("Episode finished: reward={0}, steps={1}".format(total_reward, step_count))
                 
     def play(self, num_l_episodes=100):
         for _ in range(num_l_episodes):

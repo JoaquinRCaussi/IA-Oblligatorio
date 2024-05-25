@@ -1,0 +1,36 @@
+{
+    "os": "macOS-14.5-arm64-arm-64bit",
+    "python": "3.12.2",
+    "heartbeatAt": "2024-05-25T22:09:13.200561",
+    "startedAt": "2024-05-25T22:09:07.596333",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/JoaquinRCaussi/IA-Oblligatorio.git",
+        "commit": "f57bf596954ee94723aaa5dc67c2de6a55950647"
+    },
+    "email": "joaquinrodriguezcaussi@gmail.com",
+    "root": "/Users/joaquin/Documents/Documentos - MacBook Pro de Joaqu\u00edn/Facultad/7moSemestre/InteligenciaArtificial/Obligatorio Mayo 2024",
+    "host": "MacBook-Pro-de-Joaquin-5.local",
+    "username": "joaquin",
+    "executable": "/opt/anaconda3/envs/gym/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "disk": {
+        "/": {
+            "total": 460.4317207336426,
+            "used": 139.78990173339844
+        }
+    },
+    "gpuapple": {
+        "type": "Apple M1 Pro",
+        "vendor": "sppci_vendor_Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}
