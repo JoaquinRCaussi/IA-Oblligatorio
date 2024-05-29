@@ -1,4 +1,5 @@
 import numpy as np
+import wandb
 
 class Agent():
     def __init__(self, env, Qtable, gamma, alpha, epsilon, policy_func):
@@ -16,7 +17,7 @@ class Agent():
         return self.policy_func(state, self.Qtable, self.epsilon)
         
     def train(self, num_k_episodes=1000):
-        for _ in range(num_k_episodes):
+        for i in range(num_k_episodes):
             obs,_ = self.env.reset()
             print(obs)
             done = False
@@ -32,6 +33,8 @@ class Agent():
                 print('->', state, action, reward, obs, done)
                 self.env.render()
             print("Episode finished: reward={0}, steps={1}".format(total_reward, step_count))
+            if i % 2 == 0:
+                wandb.log({'reward': total_reward})
                 
     def play(self, num_l_episodes=100):
         for _ in range(num_l_episodes):
