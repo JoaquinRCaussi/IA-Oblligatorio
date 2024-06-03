@@ -2,19 +2,20 @@ import numpy as np
 import wandb
 
 class Agent():
-    def __init__(self, env, Qtable, gamma, alpha, epsilon, policy_func):
+    def __init__(self, env, Qtable, gamma, alpha, epsilon, randomSeed, policy_func):
         self.env = env
         self.gamma = gamma
         self.Qtable = Qtable
         self.alpha = alpha
         self.epsilon = epsilon
+        self.randomSeed = randomSeed
         self.policy_func = policy_func
         self.state = env.reset()
         
         
 
     def get_action(self, state):
-        return self.policy_func(state, self.Qtable, self.epsilon)
+        return self.policy_func(state, self.Qtable, self.epsilon, self.randomSeed)
         
     def train(self, num_k_episodes=1000):
         for i in range(num_k_episodes):
@@ -34,7 +35,7 @@ class Agent():
                 self.env.render()
             print("Episode finished: reward={0}, steps={1}".format(total_reward, step_count))
             if i % 2 == 0:
-                wandb.log({'reward': total_reward})
+                wandb.log({'reward': total_reward, 'episode' : i, "Qtable": self.Qtable})
                 
     def play(self, num_l_episodes=100):
         for _ in range(num_l_episodes):
