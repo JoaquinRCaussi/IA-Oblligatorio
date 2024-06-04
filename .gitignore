@@ -1,2 +1,6 @@
 # Ignorar la carpeta wandb
 wandb/
+Taxi/__pycache__/Agent.cpython-312.pyc
+Taxi/wandb/debug-internal.log
+Taxi/wandb/debug.log
+Taxi/wandb/latest-run
