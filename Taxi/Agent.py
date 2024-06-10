@@ -3,20 +3,30 @@ import wandb
 from tqdm import tqdm
 
 class Agent():
-    def __init__(self, env, Qtable, gamma, alpha, epsilon, randomSeed, policy_func):
+    def __init__(self, env, Qtable, gamma, alpha, epsilon, randomSeed):
         self.env = env
         self.gamma = gamma
         self.Qtable = Qtable
         self.alpha = alpha
         self.epsilon = epsilon
         self.randomSeed = randomSeed
-        self.policy_func = policy_func
         self.state = env.reset()
-        
+    
+    def epsilon_greedy_policy(self, state, Q, epsilon=0.1, randomSeed=0):
+        np.random.seed(randomSeed)
+        explore = np.random.binomial(1, epsilon)
+        if explore:
+            action = self.env.action_space.sample()
+            
+        # exploit
+        else:
+            action = np.argmax(Q[state])
+            
+        return action
         
 
     def get_action(self, state):
-        return self.policy_func(state, self.Qtable, self.epsilon, self.randomSeed)
+        return self.epsilon_greedy_policy(state, self.Qtable, self.epsilon, self.randomSeed)
         
     def train(self, num_k_episodes=1000):
         all_rewards = []
@@ -35,7 +45,7 @@ class Agent():
                 self.env.render()
             all_rewards.append(total_reward)
             if i % 10 == 0:
-                wandb.log({'reward': total_reward, 'episode' : i, "Qtable": self.Qtable })
+                wandb.log({'reward': total_reward, 'episodes' : i})
         return np.mean(all_rewards)
                 
     def play(self, num_l_episodes=100):
