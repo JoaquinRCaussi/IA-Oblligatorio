@@ -7,20 +7,20 @@ class MiniMaxAgent(Agent):
         super().__init__(player)
         self.Maxdepth = MaxDepth
 
-    def eval_disparity(board):
+    def eval_disparity(self, board):
         row_lengths = [len(row) for row in board]
         return -(max(row_lengths) - min(row_lengths))
     
-    def eval_max_coins_in_row(board):
+    def eval_max_coins_in_row(self, board):
         return max(len(row) for row in board)
     
-    def eval_QuantityOfCoins(board):
+    def eval_QuantityOfCoins(self, board):
         return sum(len(row) for row in board)
     
-    def eval_possible_moves(board):
+    def eval_possible_moves(self, board):
         return len(board.get_possible_actions())
     
-    def eval_max_coins_in_row(board):
+    def eval_max_coins_in_row(self, board):
         max_coins = max(len(row) for row in board)
         return -max_coins
 
@@ -30,7 +30,7 @@ class MiniMaxAgent(Agent):
     
     def heuristic_utility(self, board):
          # Contar monedas restantes
-        return eval_disparity(board) + eval_max_coins_in_row  # Menos monedas restantes es mejor
+        return 0.6 * self.eval_disparity(board) +  0.4 * self.eval_max_coins_in_row(board)  # Menos monedas restantes es mejor
     
     def minimax(self, board, depth, MaxPlayer, alpha, beta):
         if board.is_end(self.player)[0] or depth == self.Maxdepth:
