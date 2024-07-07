@@ -14,11 +14,15 @@ class MiniMaxAgent(Agent):
     def eval_max_coins_in_row(board):
         return max(len(row) for row in board)
     
-    def eval_QuantityofCoins(board):
+    def eval_QuantityOfCoins(board):
         return sum(len(row) for row in board)
     
     def eval_possible_moves(board):
         return len(board.get_possible_actions())
+    
+    def eval_max_coins_in_row(board):
+        max_coins = max(len(row) for row in board)
+        return -max_coins
 
     def next_action(self, obs):
         _, best_action= self.minimax(obs, 0 , self.player, float('-inf'), float('inf')) # inicializamos la beta en infinito y el alpha en -infinito
@@ -26,7 +30,7 @@ class MiniMaxAgent(Agent):
     
     def heuristic_utility(self, board):
          # Contar monedas restantes
-        return eval_disparity(board) # Menos monedas restantes es mejor
+        return eval_disparity(board) + eval_max_coins_in_row  # Menos monedas restantes es mejor
     
     def minimax(self, board, depth, MaxPlayer, alpha, beta):
         if board.is_end(self.player)[0] or depth == self.Maxdepth:
